@@ -100,14 +100,14 @@ namespace Octokit.GraphQL.Core.Builders
                 {
                     var alias = node.Members?[index];
                     Expression rewritten;
-
-                    if (arg is MemberExpression member)
+                    Expression expression;
+                    if ((expression = arg as MemberExpression) != null)
                     {
-                        rewritten = VisitMember(member, alias);
+                        rewritten = VisitMember((MemberExpression)expression, alias);
                     }
-                    else if (arg is MethodCallExpression call)
+                    else if ((expression = arg as MethodCallExpression) != null)
                     {
-                        rewritten = VisitMethodCall(call, alias);
+                        rewritten = VisitMethodCall((MethodCallExpression)expression, alias);
                     }
                     else
                     {

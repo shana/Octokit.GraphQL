@@ -52,7 +52,8 @@ namespace Octokit.GraphQL.Core.Utilities
             {
                 var queryType = type.GetTypeInfo().GenericTypeArguments[0];
 
-                if (expression is MethodCallExpression methodCall)
+                MethodCallExpression methodCall;
+                if ((methodCall = expression as MethodCallExpression) != null)
                 {
                     if (IsSelect(methodCall.Method))
                     {

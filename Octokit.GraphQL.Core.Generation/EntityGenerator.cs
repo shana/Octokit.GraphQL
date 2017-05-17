@@ -188,8 +188,9 @@ namespace Octokit.GraphQL.Core.Generation
         {
             var name = TypeUtilities.PascalCase(field.Name);
             var csharpType = TypeUtilities.GetCSharpType(type);
-
-            GenerateArguments(field, out string arguments, out string parameters);
+            string arguments, parameters;
+            arguments = parameters = null;
+            GenerateArguments(field, out arguments, out parameters);
 
             return $"        public {csharpType} {name}({arguments}) => null;";
         }
@@ -199,8 +200,9 @@ namespace Octokit.GraphQL.Core.Generation
             var name = TypeUtilities.PascalCase(field.Name);
             var typeName = TypeUtilities.GetCSharpType(type);
             var implName = GetEntityImplementationName(type, rootNamespace);
-
-            GenerateArguments(field, out string arguments, out string parameters);
+            string arguments, parameters;
+            arguments = parameters = null;
+            GenerateArguments(field, out arguments, out parameters);
 
             return $"        public {typeName} {name}({arguments}) => this.CreateMethodCall(x => x.{name}({parameters}), {implName}.Create);";
         }
@@ -217,7 +219,9 @@ namespace Octokit.GraphQL.Core.Generation
             var name = TypeUtilities.PascalCase(field.Name);
             var typeName = TypeUtilities.GetCSharpType(type);
 
-            GenerateArguments(field, out string arguments, out string parameters);
+            string arguments, parameters;
+            arguments = parameters = null;
+            GenerateArguments(field, out arguments, out parameters);
 
             return $"        public {typeName} {name}({arguments}) => this.CreateMethodCall(x => x.{name}({parameters}));";
         }
